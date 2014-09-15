@@ -1,27 +1,27 @@
-from flask import Flask, jsonify, request, render_template
-from collections import Counter
-
-### HELPERS ###
-def validate_word_count(text, words):
-    cnt = Counter()
-    for word in text.split():
-        if word not in words:
-            cnt[word] += 1
-    return cnt
+from flask import Flask, jsonify, request, render_template, abort
+import json
+import utils
+import db
 
 ### APP ###
 app = Flask(__name__)
 
 @app.route("/")
 def main():
-    resp = {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-        "words": ["ipsum", "dolor", "set"] }
+    text, words = utils.get_random_text()
+    token = utils.generate_token()
+    # TODO: presist in DB
+    resp = { "text": text, "words": words, "token" : token }
     return jsonify(resp)
 
 @app.route("/validate", methods=["POST"])
 def validate():
-    return "hello world"
+    data = request.json
+    text_model = db.fetch_text(data.get('token'))
+    if not text_model or text_model[0] != data.get('text') or \
+       not utils.validate_word_count(text_model[0], text_model[1], data.get('words')):
+        abort(400)
+    return jsonify({"status": "success"})
 
 @app.route('/admin')
 def admin():

@@ -1,12 +1,12 @@
-from flask import Flask, jsonify
-app = Flask(__name__)
+ToDo
+===
 
-@app.route("/")
-def hello():
-    resp = {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-        "words": ["ipsum", "dolor", "set"] }
-    return jsonify(resp)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+- Generate random text 
+- Think of a way to arbitrarily select a few words to omit in the text
+- Save data in a file (pickle?)
+- Add admin entered data in file
+- Add tests
+- Setup a build script
+- Create a client to test
+- Generate a seed that the user sends to verify against
+- Make this stateless
