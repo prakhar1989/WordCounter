@@ -12,5 +12,5 @@ Word Count Validator
 - [ ] Setup a build script
 - [ ] Create a client
 - [ ] Postman collection file
-- [ ] Deploy on DigitalOcean
+- [x] Deploy on DigitalOcean
 - [ ] Detailed Readme
