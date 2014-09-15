@@ -1,4 +1,5 @@
 from collections import Counter
+import random
 
 ### HELPERS ###
 def validate_word_count(text, words_excluded, words_returned):
@@ -14,7 +15,7 @@ def validate_word_count(text, words_excluded, words_returned):
     return True
 
 def generate_token():
-    return 1341441
+    return random.randrange(100000, 999999)
 
 def get_random_text():
     text = "the quick brown fox jumped on the lazy dog"

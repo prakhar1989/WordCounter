@@ -7,8 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    # TODO: fetch a random value from db
-    text_model = db.fetch_text(1341441)
+    text_model = db.get_random_text()
     if not text_model:
         abort(500) # Server error
     text, words, token = text_model
@@ -31,10 +30,13 @@ def admin():
 @app.route('/add', methods=["POST"])
 def add():
     # persist in db
-    #text = request.post("text")
-    #words = utils.generate_excluded_words(text)
-    #text, words = utils.get_random_text()
-    #token = utils.generate_token()
+    text = request.form["text"]
+    words = request.form["words"]
+    for word in words.split():
+        if word not in text.split():
+            return "Invalid data"
+    token = utils.generate_token()
+    db.add_text(text, words, token)
     return "Data added!"
 
 if __name__ == "__main__":

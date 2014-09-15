@@ -14,13 +14,22 @@ def fetch_text(token):
     db.close()
     return result
 
-def add_text(token):
+def add_text(text, words, token):
     db = get_db()
     c = db.cursor()
-    text = ("the quick brown fox jumped on the lazy dog", "quick brown lazy", token)
+    text = (text, words, token)
+    # text = ("the quick brown fox jumped on the lazy dog", "quick brown lazy", token)
     c.execute('INSERT INTO texts VALUES (?, ?, ?)', text)
     db.commit()
     db.close()
+
+def get_random_text():
+    db = get_db()
+    c = db.cursor()
+    c.execute("SELECT * FROM texts ORDER BY RANDOM() LIMIT 1")
+    result = c.fetchone()
+    db.close()
+    return result
 
 def setup():
     db = get_db()
