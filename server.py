@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template, abort
+from flask import Flask, jsonify, request, render_template, abort, redirect
 from app import utils
 from app import db
 
@@ -13,8 +13,9 @@ def main():
         db.add_text(text, words, token)
     else:
         text_model = db.get_random_text()
+        # if nothing in DB, generate a random one
         if not text_model:
-            abort(500)
+            redirect("/?random=true")
         text, words, token = text_model
     resp = { "text": text, "words": words.split(), "token" : token }
     return jsonify(resp)

@@ -10,7 +10,7 @@ def validate_word_count(text, words_excluded, words_returned):
         if word not in ignore_words:
             cnt[word] += 1
     for word in cnt:
-        if  words_returned.get(word) and \
+        if  not words_returned.get(word) or \
                 str(cnt[word]) != words_returned[word]:
             return False
     return True

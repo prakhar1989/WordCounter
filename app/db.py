@@ -1,4 +1,6 @@
 import sqlite3
+import argparse
+import utils
 
 DATABASE = "data/texts.db"
 
@@ -39,6 +41,15 @@ def setup():
     db.close()
 
 if __name__ == "__main__":
-    # SETUP ARGPARSE
     # ADD DECORATORS OR WITH IF POSSIBLE
-    setup()
+    parser = argparse.ArgumentParser(description="Setup data for WordCount Validator")
+    parser.add_argument("setup", help="Initialize database", nargs="?")
+
+    args = parser.parse_args()
+    if args.setup:
+        print "Setting up database ...",
+        setup()
+        # seed data
+        add_text("the quick brown fox jumped over the lazy dog", \
+                 "fox brown lazy", utils.generate_token())
+        print "Done."
