@@ -1,7 +1,6 @@
-## SETUP A DECORATOR
 import sqlite3
 
-DATABASE = 'data/texts.db'
+DATABASE = "data/texts.db"
 
 def get_db():
     db = sqlite3.connect(DATABASE)
@@ -27,9 +26,11 @@ def setup():
     db = get_db()
     c = db.cursor()
     c.execute(''' DROP TABLE IF EXISTS texts ''')
-    c.execute(''' CREATE TABLE texts (body TEXT, words TEXT, token INTEGER) ''')
+    c.execute(''' CREATE TABLE texts (body TEXT, words TEXT, token INTEGER PRIMARY KEY) ''')
     db.commit()
     db.close()
 
 if __name__ == "__main__":
+    # SETUP ARGPARSE
+    # ADD DECORATORS OR WITH IF POSSIBLE
     setup()

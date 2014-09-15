@@ -1,17 +1,18 @@
 from flask import Flask, jsonify, request, render_template, abort
-import json
-import utils
-import db
+from app import utils
+from app import db
 
 ### APP ###
 app = Flask(__name__)
 
 @app.route("/")
 def main():
-    text, words = utils.get_random_text()
-    token = utils.generate_token()
-    # TODO: presist in DB
-    resp = { "text": text, "words": words, "token" : token }
+    # TODO: fetch a random value from db
+    text_model = db.fetch_text(1341441)
+    if not text_model:
+        abort(500) # Server error
+    text, words, token = text_model
+    resp = { "text": text, "words": words.split(), "token" : token }
     return jsonify(resp)
 
 @app.route("/validate", methods=["POST"])
@@ -29,6 +30,11 @@ def admin():
 
 @app.route('/add', methods=["POST"])
 def add():
+    # persist in db
+    #text = request.post("text")
+    #words = utils.generate_excluded_words(text)
+    #text, words = utils.get_random_text()
+    #token = utils.generate_token()
     return "Data added!"
 
 if __name__ == "__main__":
