@@ -8,6 +8,10 @@ body {
   background: #eee;
   font-family: sans-serif;
 }
+h1 {
+  font-size: 22px;
+  margin: 8px 0px;
+}
 .container {
   margin: 40px auto;
   background: white;
@@ -15,14 +19,43 @@ body {
   width: 500px;
   height: 300px;
 }
+input[type="text"], textarea {
+  width: 500px;
+  border: 0px;
+  font-size: 14px;
+  background: #f7f7f7;
+  padding: 8px;
+}
+div.form-group {
+  margin: 20px 0;
+}
+input[type="submit"] {
+  border: 0px;
+  background: #0074d9;
+  font-size: 14px;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  box-shadow: inset 0 -.1em rgba(0,0,0,.3)
+}
 </style>
 <body>
   <div class="container">
-    <h1>Admin Section</h1>
+    <h1>Admin</h1>
     <form action="/add" method="post">
-      <textarea name="text" rows="10" cols="40"></textarea>
-      <input type="text" name="words" placeholder="Comma separated words to exclude" />
-      <input type="submit" value="Add!" />
+      <div class="form-group">
+        <label for="text">Text</label> <br/>
+        <textarea name="text" rows="4" placeholder="lorem ipsum dolor set amet"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="words">Words to exclude (space separated)</label> <br/>
+        <input type="text" name="words" placeholder="foo bar baz" />
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Add!" />
+      </div>
     </form>
   </div>
 </body>
