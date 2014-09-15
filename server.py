@@ -7,10 +7,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    text_model = db.get_random_text()
-    if not text_model:
-        abort(500) # Server error
-    text, words, token = text_model
+    if request.args.get("random"):
+        token = utils.generate_token()
+        text, words = utils.generate_random_text()
+        db.add_text(text, words, token)
+    else:
+        text_model = db.get_random_text()
+        if not text_model:
+            abort(500)
+        text, words, token = text_model
     resp = { "text": text, "words": words.split(), "token" : token }
     return jsonify(resp)
 

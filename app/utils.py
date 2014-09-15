@@ -1,4 +1,5 @@
 from collections import Counter
+from faker import Factory
 import random
 
 ### HELPERS ###
@@ -14,9 +15,18 @@ def validate_word_count(text, words_excluded, words_returned):
             return False
     return True
 
+# generate a random 6 digit client token
 def generate_token():
     return random.randrange(100000, 999999)
 
-def get_random_text():
-    text = "the quick brown fox jumped on the lazy dog"
-    return text, ["quick", "brown", "lazy"]
+def get_exclusion_words(text):
+    words = text.split()
+    # max number of words should be at least one but not all
+    max_count = random.randrange(1, len(words)-2)
+    return set(words[i] for i in random.sample(range(0, len(words)), max_count))
+
+def generate_random_text():
+    fake = Factory.create()
+    text = fake.text()
+    words = " ".join(get_exclusion_words(text))
+    return text, words
