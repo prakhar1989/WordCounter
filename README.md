@@ -9,7 +9,7 @@ Word Count Validator
 - [x] Generate a token that the user sends to verify against
 - [x] Setup some seed data
 - [ ] Add tests
-- [ ] Setup a build script
+- [x] Setup a build script
 - [ ] Create a client
 - [ ] Postman collection file
 - [x] Deploy on DigitalOcean
