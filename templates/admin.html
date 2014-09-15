@@ -1,0 +1,29 @@
+<html>
+<head>
+  <title>Admin</title>
+</head>
+<style type="text/css">
+body {
+  margin: 0px auto;
+  background: #eee;
+  font-family: sans-serif;
+}
+.container {
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  width: 500px;
+  height: 300px;
+}
+</style>
+<body>
+  <div class="container">
+    <h1>Admin Section</h1>
+    <form action="/add" method="post">
+      <textarea name="text" rows="10" cols="40"></textarea>
+      <input type="text" name="words" placeholder="Comma separated words to exclude" />
+      <input type="submit" value="Add!" />
+    </form>
+  </div>
+</body>
+</html>
