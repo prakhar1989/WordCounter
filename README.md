@@ -100,7 +100,6 @@ The application uses SQLite for persistence and validation. To setup and seed th
 $ ./run -setup
 ```
 
-
 ### Client
 Also included is a sample client implementation that fetches 10 random texts from the server, sends a request and prints the response recieved.
 ```shell
@@ -112,3 +111,9 @@ Text: lorem ipsum dolor set amit dol... Status Code: 200
 Text: she sells sea shells at the se... Status Code: 200
 Text: she sells sea shells at the se... Status Code: 200
 ```
+
+### Libraries
+The following open-source libraries are used in the project
+- [Flask](http://flask.pocoo.org/) - A sinatra like micro web framework for Python
+- [Faker](https://github.com/joke2k/faker) - Used for generating fake random text
+- [Requests](http://docs.python-requests.org/en/latest/) - Simple HTTP library used for client implementation
