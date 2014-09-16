@@ -69,30 +69,29 @@ def db_get_random_text():
 # ------
 # ROUTES
 # ------
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def main():
-    if request.args.get("random"):
-        token = utils.generate_token()
-        text, words = utils.generate_random_text()
-        db_add_text(text, words, token)
+    if request.method == "GET":
+        if request.args.get("random"):
+            token = utils.generate_token()
+            text, words = utils.generate_random_text()
+            db_add_text(text, words, token)
+        else:
+            text_model = db_get_random_text()
+            if not text_model: # if nothing in DB, generate random text
+                redirect("/?random=true")
+            text, words, token = text_model
+        resp = { "text": text, "words": words.split(), "token" : token }
+        return jsonify(resp)
     else:
-        text_model = db_get_random_text()
-        if not text_model: # if nothing in DB, generate random text
-            redirect("/?random=true")
-        text, words, token = text_model
-    resp = { "text": text, "words": words.split(), "token" : token }
-    return jsonify(resp)
-
-@app.route("/validate", methods=["POST"])
-def validate():
-    if not request.json:
-        abort(400)
-    data = request.json
-    text_model = db_fetch_text(data.get('token'))
-    if not text_model or text_model[0] != data.get('text') or \
-       not utils.validate_word_count(text_model[0], text_model[1], data.get('words')):
-        abort(400)
-    return jsonify({"status": "success"})
+        if not request.json:
+            abort(400)
+        data = request.json
+        text_model = db_fetch_text(data.get('token'))
+        if not text_model or text_model[0] != data.get('text') or \
+           not utils.validate_word_count(text_model[0], text_model[1], data.get('words')):
+            abort(400)
+        return jsonify({"status": "success"})
 
 @app.route('/admin')
 def admin():

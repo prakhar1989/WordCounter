@@ -22,8 +22,8 @@ $ ./run
 | Route        | Description    |
 | ------------- |:-------------:|
 | GET /     | Return pre-generated random text |
-| GET /?random?true | Generate and return random text |
-| POST /validate     | Validate request|
+| GET /?random=true | Generate and return random text |
+| POST /| Validate request|
 | GET /admin | Add new data |
 
 #### Data Format
@@ -38,7 +38,7 @@ $ ./run
 ```
 where `words` is an array of excluded words.
 
-`POST /validate` accepts data in `JSON` in the following format
+`POST /` accepts data in `JSON` in the following format
 ```javascript
 {
   "text": "the quick brown fox jumped over the lazy dog", 
@@ -59,7 +59,7 @@ and returns a status `200 OK` only iff all the following hold true
 
 In all other cases, a status of `400 Bad Request` is returned.
 
-Below is a sample `cURL` request to `/validate`
+Below is a sample `cURL` request to `/`
 ```shell
 $ curl -X POST -H "Content-Type:application/json" -d '{
   "text": "the quick brown fox jumped over the lazy dog", 
@@ -71,7 +71,7 @@ $ curl -X POST -H "Content-Type:application/json" -d '{
     "over": "1",
     "dog": "1"
   }
-}' http://127.0.0.1:8000/validate
+}' http://127.0.0.1:8000/
 ```
 
 

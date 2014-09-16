@@ -26,31 +26,31 @@ class TestWordCountApp(unittest.TestCase):
 
     def test_default_route_gives_json(self):
         rv = self.app.get('/')
-        assert "brown fox jumped" in rv.data
+        assert rv.status_code == 200
 
     def test_correct_data_gives_200(self):
         request_data = self.get_request_data()
         headers = [("Content-Type", "application/json")];
-        rv = self.app.post('/validate', headers=headers, data=json.dumps(request_data))
+        rv = self.app.post('/', headers=headers, data=json.dumps(request_data))
         assert rv.status_code == 200
 
     def test_incorrect_token_gives_400(self):
         request_data = self.get_request_data()
         request_data["token"] = 0
         headers = [("Content-Type", "application/json")];
-        rv = self.app.post('/validate', headers=headers, data=json.dumps(request_data))
+        rv = self.app.post('/', headers=headers, data=json.dumps(request_data))
         assert rv.status_code == 400
 
     def test_incorrect_text_gives_400(self):
         request_data = self.get_request_data()
         request_data["text"] = "hello world"
         headers = [("Content-Type", "application/json")];
-        rv = self.app.post('/validate', headers=headers, data=json.dumps(request_data))
+        rv = self.app.post('/', headers=headers, data=json.dumps(request_data))
         assert rv.status_code == 400
 
     def test_incorrect_word_count_gives_400(self):
         request_data = self.get_request_data()
         request_data["words"] = {}
         headers = [("Content-Type", "application/json")];
-        rv = self.app.post('/validate', headers=headers, data=json.dumps(request_data))
+        rv = self.app.post('/', headers=headers, data=json.dumps(request_data))
         assert rv.status_code == 400

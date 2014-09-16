@@ -3,8 +3,8 @@ import json
 import time
 from collections import Counter
 
-URL = "http://192.241.186.225/"
-# URL = "http://127.0.0.1:8000/"
+#URL = "http://192.241.186.225/"
+URL = "http://127.0.0.1:8000/"
 
 def get_count(text, words_excluded):
     cnt = Counter()
@@ -26,7 +26,7 @@ def get_request():
                     "text"  : data.get("text"),
                     "token" : data.get("token")}
     headers = {'content-type': 'application/json'}
-    r = requests.post(URL + "validate", data=json.dumps(request_data), headers=headers)
+    r = requests.post(URL, data=json.dumps(request_data), headers=headers)
     print "Text:", data.get('text')[:30] + "...", "Status Code:", r.status_code
 
 if __name__ == "__main__":
