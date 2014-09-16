@@ -23,14 +23,6 @@ def connect_db():
     rv.row_factory = sqlite3.Row
     return rv
 
-def init_db():
-    with app.app_context():
-        db = get_db()
-        c = db.cursor()
-        c.execute(''' DROP TABLE IF EXISTS texts ''')
-        c.execute(''' CREATE TABLE texts (body TEXT, words TEXT, token INTEGER PRIMARY KEY) ''')
-        db.commit()
-
 def setup_db(seed=True):
     db = connect_db()
     c = db.cursor()
@@ -93,6 +85,8 @@ def main():
 
 @app.route("/validate", methods=["POST"])
 def validate():
+    if not request.json:
+        abort(400)
     data = request.json
     text_model = db_fetch_text(data.get('token'))
     if not text_model or text_model[0] != data.get('text') or \

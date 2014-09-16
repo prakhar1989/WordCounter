@@ -12,6 +12,19 @@ $ chmod +x run
 $ ./run
 ```
 
+### Usage
+```shell
+./run -h
+usage: run [-h] [-setup] [-test]
+
+Run WordCount Validator
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -setup      Initialize database
+  -test       Run testcases
+```
+
 ### ToDo
 - [x] Generate random text 
 - [x] Think of a way to arbitrarily select a few words to omit in the text
@@ -19,7 +32,7 @@ $ ./run
 - [x] Persist admin data
 - [x] Generate a token that the user sends to verify against
 - [x] Setup some seed data
-- [ ] Add tests
+- [x] Add tests
 - [x] Setup a build script
 - [ ] Create a client
 - [ ] Postman collection file

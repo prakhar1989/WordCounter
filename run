@@ -6,9 +6,6 @@ from tests import unittests
 from tests import integration
 import unittest
 
-def hello():
-  print "helllo"
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run WordCount Validator")
     parser.add_argument("-setup", help="Initialize database", default=False, action="store_true")
