@@ -40,7 +40,7 @@
 			"data": [],
 			"dataMode": "raw",
 			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 400;",
+			"tests": "tests[\"Status code is 400\"] = responseCode.code === 400;",
 			"time": 1410886978552,
 			"name": "Sea Shells - 400",
 			"description": "",
