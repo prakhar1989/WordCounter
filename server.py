@@ -108,7 +108,7 @@ def add():
             return "Invalid data"
     token = utils.generate_token()
     db_add_text(text, words, token)
-    return "Data added!"
+    return "Success! <a href='/'>Back</a>"
 
 if __name__ == "__main__":
     app.run(port=8000)

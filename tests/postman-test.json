@@ -1,0 +1,72 @@
+{
+	"id": "a9591924-b1dc-6f5e-7635-9c22b7d774ff",
+	"name": "animoto",
+	"description": "",
+	"order": [
+		"0fc20580-99e5-d44d-f715-ad266a4afc51",
+		"ece96c76-14c4-5882-9d0c-ee393e62138e",
+		"c7407936-1f04-fe50-94f5-aabd462506a0"
+	],
+	"folders": [],
+	"timestamp": 1410799142077,
+	"synced": false,
+	"requests": [
+		{
+			"id": "0fc20580-99e5-d44d-f715-ad266a4afc51",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://192.241.186.225/validate",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "tests[\"Body matches string\"] = responseBody.has(\"success\");\n\ntests[\"Status code is 200\"] = responseCode.code === 200;",
+			"time": 1410886641274,
+			"name": "Quick Brown - 200",
+			"description": "",
+			"collectionId": "a9591924-b1dc-6f5e-7635-9c22b7d774ff",
+			"responses": [],
+			"synced": false,
+			"rawModeData": "{\n  \"text\": \"the quick brown fox jumped over the lazy dog\", \n  \"token\": \"620770\",\n  \"words\": {\n    \"the\": \"2\",\n    \"quick\": \"1\",\n    \"jumped\": \"1\",\n    \"over\": \"1\",\n    \"dog\": \"1\"\n  }\n}"
+		},
+		{
+			"id": "c7407936-1f04-fe50-94f5-aabd462506a0",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://192.241.186.225/validate",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 400;",
+			"time": 1410886978552,
+			"name": "Sea Shells - 400",
+			"description": "",
+			"collectionId": "a9591924-b1dc-6f5e-7635-9c22b7d774ff",
+			"responses": [],
+			"synced": false,
+			"rawModeData": "{\n  \"text\": \"she sells sea shells at the seashore he sells sand shells at the bookstore\", \n  \"token\": \"788009\",\n  \"words\": {\n    \"she\": \"1\",\n    \"sells\": \"2\",\n    \"at\": \"2\"\n  }\n}"
+		},
+		{
+			"id": "ece96c76-14c4-5882-9d0c-ee393e62138e",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://192.241.186.225/validate",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "tests[\"Body matches string\"] = responseBody.has(\"success\");\n\ntests[\"Status code is 200\"] = responseCode.code === 200;",
+			"time": 1410886736779,
+			"name": "Lorem Ipsum - 200",
+			"description": "",
+			"collectionId": "a9591924-b1dc-6f5e-7635-9c22b7d774ff",
+			"responses": [],
+			"synced": false,
+			"rawModeData": "{\n  \"text\": \"lorem ipsum dolor set amit dolor set amit\", \n  \"token\": \"421826\",\n  \"words\": {\n    \"ipsum\": \"1\",\n    \"dolor\": \"2\",\n    \"set\": 2\n  }\n}"
+		}
+	]
+}
