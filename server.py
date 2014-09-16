@@ -31,7 +31,7 @@ def init_db():
         c.execute(''' CREATE TABLE texts (body TEXT, words TEXT, token INTEGER PRIMARY KEY) ''')
         db.commit()
 
-def setup_and_seed_db(seed=True):
+def setup_db(seed=True):
     db = connect_db()
     c = db.cursor()
     c.execute(''' DROP TABLE IF EXISTS texts ''')

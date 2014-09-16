@@ -11,8 +11,7 @@ class TestWordCountApp(unittest.TestCase):
         pass
 
     def test_incorrect_validation(self):
-        r = requests.get(self.url)
-        self.assertTrue(4 == 4)
+        pass
 
     def test_admin_addition(self):
         pass
