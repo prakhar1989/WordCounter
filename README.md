@@ -2,6 +2,8 @@ Word Count Validator
 ===
 
 ### Building
+To run the app, you must have `Python 2.7.x` and `pip` installed. To install `pip` for OSX, please see [this](ihttp://stackoverflow.com/questions/17271319/installing-pip-on-mac-os-x).
+
 ```shell
 $ git clone https://github.com/prakhar1989/WordCounter.git
 $ cd WordCounter

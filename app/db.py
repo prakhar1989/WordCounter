@@ -20,7 +20,7 @@ def add_text(text, words, token):
     db = get_db()
     c = db.cursor()
     text = (text, words, token)
-    c.execute('INSERT INTO texts VALUES (?, ?, ?)', text)
+    c.execute("INSERT INTO texts VALUES (?, ?, ?)", text)
     db.commit()
     db.close()
 

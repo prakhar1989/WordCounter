@@ -11,7 +11,7 @@ def validate_word_count(text, words_excluded, words_returned):
             cnt[word] += 1
     for word in cnt:
         if  not words_returned.get(word) or \
-                str(cnt[word]) != words_returned[word]:
+                str(cnt[word]) != str(words_returned[word]):
             return False
     return True
 
