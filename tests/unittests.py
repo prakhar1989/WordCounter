@@ -1,10 +1,9 @@
-import random
 import unittest
 from app import db
 from app import utils
 from collections import Counter
 
-class TestWordCountValidator(unittest.TestCase):
+class TestWordCountUtils(unittest.TestCase):
 
     def setUp(self):
         pass
@@ -30,6 +29,3 @@ class TestWordCountValidator(unittest.TestCase):
                 if word not in words.split():
                     cnt[word] += 1
             self.assertTrue(utils.validate_word_count(text, words, dict(cnt)))
-
-if __name__ == '__main__':
-    unittest.main()
