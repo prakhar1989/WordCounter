@@ -3,7 +3,7 @@ Word Count Validator
 
 ### Demo
 
-The service is hosted [online](http://192.241.186.225/) for you to play.
+The service is hosted [online](http://192.241.186.225/)
 
 ### Build
 To run the app on your own machine, you must have `Python 2.7.x` and `pip` installed.
@@ -21,8 +21,8 @@ $ ./run
 
 | Route        | Description    |
 | ------------- |:-------------:|
-| GET /     | Return random text |
-| GET /?random?true | Create and return random text |
+| GET /     | Return pre-generated random text |
+| GET /?random?true | Generate and return random text |
 | POST /validate     | Validate request|
 | GET /admin | Add new data |
 
@@ -53,15 +53,15 @@ where `words` is an array of excluded words.
 }
 ```
 and returns a status `200 OK` only iff all the following hold true
-- `token` matches the response given to the client 
-- `text` matches the response given to the client
-- Word count in the `words` object is correct and **excludes** the words returned in the response to the client
+- `token` matches the `token` in the response given to the client 
+- `text` matches the `text` in the response given to the client
+- Word count in the `words` object is correct and **excludes** the words returned in the response given to the client
 
 In all other cases, a status of `400 Bad Request` is returned.
 
-Below is a sample cURL request to `/validate'
+Below is a sample `cURL` request to `/validate`
 ```shell
-curl -X POST -H "Content-Type:application/json" -d '{
+$ curl -X POST -H "Content-Type:application/json" -d '{
   "text": "the quick brown fox jumped over the lazy dog", 
   "token": "620770",
   "words": {
@@ -74,18 +74,6 @@ curl -X POST -H "Content-Type:application/json" -d '{
 }' http://127.0.0.1:8000/validate
 ```
 
-### Usage
-```shell
-$ ./run -h
-usage: run [-h] [-setup] [-test]
-
-Run WordCount Validator
-
-optional arguments:
-  -h, --help  show this help message and exit
-  -setup      Initialize database
-  -test       Run testcases
-```
 
 ### Tests
 The app contains both unit tests and integrations tests. To run simply type the following
@@ -94,3 +82,33 @@ $ ./run -test
 ```
 An additional [Postman](http://getpostman.com) collection has been bundled in `tests/postman-test.json` which can be run the [Newman](https://www.npmjs.org/package/newman) - a node.js test runner that I built for postman. Here's the screenshot below of the output - 
 ![image](newman_results.png)
+
+### Structure
+```shell
+├── Makefile         -> The build script for the project
+├── README.md        -> This file
+├── app              -> App specific helper python file
+├── client.py        -> Sample client implementation
+├── requirements.txt -> Python Dependancies
+├── run              -> App runner
+├── server.py        -> Server implementation
+├── templates        -> HTML template for admin
+├── tests            -> Integration and unit tests
+```
+The application uses SQLite for persistence and validation. To setup and seed the db.
+```shell
+$ ./run -setup
+```
+
+
+### Client
+Also included is a sample client implementation that fetches 10 random texts from the server, sends a request and prints the response recieved.
+```shell
+$ python client.py
+Hitting 10 requests ...
+Text: the quick brown fox jumped ove... Status Code: 200
+Text: Iure omnis consequuntur doloru... Status Code: 200
+Text: lorem ipsum dolor set amit dol... Status Code: 200
+Text: she sells sea shells at the se... Status Code: 200
+Text: she sells sea shells at the se... Status Code: 200
+```
