@@ -17,7 +17,8 @@ def get_request():
     try:
         r = requests.get(URL)
     except:
-        print "Err: Unable to connect to the server." return
+        print "Err: Unable to connect to the server."
+        return
 
     data = r.json()
     count = get_count(data.get('text'), data.get('words'))
