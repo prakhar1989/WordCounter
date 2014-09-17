@@ -3,8 +3,8 @@ import json
 import time
 from collections import Counter
 
-#URL = "http://192.241.186.225/"
-URL = "http://127.0.0.1:8000/"
+URL = "http://192.241.186.225/"
+#URL = "http://127.0.0.1:8000/"
 
 def get_count(text, words_excluded):
     cnt = Counter()

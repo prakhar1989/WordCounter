@@ -60,3 +60,8 @@ class TestWordCountApp(unittest.TestCase):
         request_data = {}
         rv = self.app.post('/', headers=headers, data=json.dumps(request_data))
         assert rv.status_code == 400
+
+    def test_incorrect_post_method_gives_400(self):
+        request_data = self.get_request_data()
+        rv = self.app.post('/', data=json.dumps(request_data))
+        assert rv.status_code == 400

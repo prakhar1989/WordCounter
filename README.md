@@ -60,6 +60,8 @@ and returns a status `200 OK` only iff all the following hold true
 
 In all other cases, a status of `400 Bad Request` is returned.
 
+**Note**: Punctuations matter. Hence `fox` and `fox.` are considered two different words.
+
 Below is a sample `cURL` request to `/`
 ```shell
 $ curl -X POST -H "Content-Type:application/json" -d '{
