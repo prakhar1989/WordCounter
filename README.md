@@ -7,6 +7,7 @@ The service is hosted [online](http://192.241.186.225/)
 
 ### Build
 To run the app on your own machine, you must have `Python 2.7.x` and `pip` installed.
+The preferred way of installing the dependancies is using [Virtualenv](http://virtualenv.readthedocs.org/en/latest/virtualenv.html). If you dont have virtualenv, you need to run `sudo make install`.
 
 ```shell
 $ git clone https://github.com/prakhar1989/WordCounter.git

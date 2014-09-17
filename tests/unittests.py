@@ -1,5 +1,4 @@
 import unittest
-from app import db
 from app import utils
 from collections import Counter
 

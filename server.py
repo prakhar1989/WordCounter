@@ -4,7 +4,6 @@ Server app for WordCount Validator
 """
 from flask import Flask, jsonify, request, render_template, abort, redirect, g
 from app import utils
-from app import db
 import os
 import sqlite3
 
@@ -25,7 +24,7 @@ def connect_db():
 
 def setup_db(seed=True):
     """ create a new DB and add seed data if seed is True """
-    db = connect_db()
+    db = sqlite3.connect(app.config["DATABASE"])
     c = db.cursor()
     c.execute(''' DROP TABLE IF EXISTS texts ''')
     c.execute(''' CREATE TABLE texts (body TEXT, words TEXT, token INTEGER PRIMARY KEY) ''')
