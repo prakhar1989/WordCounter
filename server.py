@@ -24,6 +24,7 @@ def connect_db():
     return rv
 
 def setup_db(seed=True):
+    """ create a new DB and add seed data if seed is True """
     db = connect_db()
     c = db.cursor()
     c.execute(''' DROP TABLE IF EXISTS texts ''')
@@ -35,6 +36,8 @@ def setup_db(seed=True):
     db.commit()
     db.close()
 
+# g is request specific and dies at the end 
+# of the reqeust - ensuring statelessness
 def get_db():
     if not hasattr(g, 'sqlite_db'):
         g.sqlite_db = connect_db()
@@ -48,7 +51,11 @@ def close_db(error):
 def db_fetch_text(token):
     db = get_db()
     c = db.cursor()
-    c.execute('SELECT * FROM texts WHERE token=?', (int(token), ))
+    try:
+        token = int(token)
+    except ValueError:
+        return (None, None, None)
+    c.execute('SELECT * FROM texts WHERE token=?', (token, ))
     result = c.fetchone()
     return result
 
@@ -84,7 +91,8 @@ def main():
         resp = { "text": text, "words": words.split(), "token" : token }
         return jsonify(resp)
     else:
-        if not request.json:
+        if not request.json or not request.json.get("token") or \
+           not request.json.get('text') or not request.json.get('words'):
             abort(400)
         data = request.json
         text_model = db_fetch_text(data.get('token'))
@@ -99,15 +107,20 @@ def admin():
 
 @app.route('/add', methods=["POST"])
 def add():
-    # persist in db
     text = request.form["text"]
     words = request.form["words"]
-    for word in words.split():
-        if word not in text.split():
-            return "Invalid data"
+    if not words:
+        # autogenerate words
+        words = " ".join(utils.get_exclusion_words(text))
+        print words
+    else:
+        for word in words.split():
+            if word not in text.split():
+                return jsonify({"status":
+                    "Invalid data - few words not found in data."})
     token = utils.generate_token()
     db_add_text(text, words, token)
-    return "Success! <a href='/'>Back</a>"
+    return jsonify({"status": "Data added successfully"})
 
 if __name__ == "__main__":
     app.run(port=8000)

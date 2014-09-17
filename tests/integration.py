@@ -54,3 +54,9 @@ class TestWordCountApp(unittest.TestCase):
         headers = [("Content-Type", "application/json")];
         rv = self.app.post('/', headers=headers, data=json.dumps(request_data))
         assert rv.status_code == 400
+
+    def test_incorrect_data_format_gives_400(self):
+        headers = [("Content-Type", "application/json")];
+        request_data = {}
+        rv = self.app.post('/', headers=headers, data=json.dumps(request_data))
+        assert rv.status_code == 400
